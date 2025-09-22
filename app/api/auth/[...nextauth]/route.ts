@@ -23,4 +23,9 @@ const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions)
 
+// Required for static export
+export async function generateStaticParams() {
+  return []
+}
+
 export { handler as GET, handler as POST }
