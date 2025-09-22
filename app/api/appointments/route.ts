@@ -1,52 +1,88 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
-import { z } from 'zod'
 
-const createAppointmentSchema = z.object({
-  studentId: z.string(),
-  patientId: z.string(),
-  title: z.string(),
-  description: z.string().optional(),
-  date: z.string().transform((str) => new Date(str)),
-  duration: z.number().min(15).max(480), // 15 minutes to 8 hours
-  price: z.number().optional(),
-  discount: z.number().min(0).max(100).optional(),
-  isFree: z.boolean().optional()
-})
+// Mock data for static build
+const mockAppointments = [
+  {
+    id: '1',
+    title: 'Limpieza Dental',
+    description: 'Limpieza dental completa y profilaxis',
+    date: '2024-01-15T10:00:00Z',
+    duration: 60,
+    status: 'CONFIRMED',
+    price: 50000,
+    discount: 20,
+    isFree: false,
+    student: {
+      firstName: 'Laura',
+      lastName: 'Fernández',
+      email: 'laura@email.com'
+    },
+    patient: {
+      firstName: 'María',
+      lastName: 'González',
+      email: 'maria@email.com'
+    }
+  },
+  {
+    id: '2',
+    title: 'Consulta de Ortodoncia',
+    description: 'Evaluación inicial para tratamiento de ortodoncia',
+    date: '2024-01-16T14:30:00Z',
+    duration: 90,
+    status: 'SCHEDULED',
+    price: 80000,
+    discount: 0,
+    isFree: false,
+    student: {
+      firstName: 'Miguel',
+      lastName: 'Torres',
+      email: 'miguel@email.com'
+    },
+    patient: {
+      firstName: 'Carlos',
+      lastName: 'Ruiz',
+      email: 'carlos@email.com'
+    }
+  },
+  {
+    id: '3',
+    title: 'Endodoncia',
+    description: 'Tratamiento de conducto en molar superior',
+    date: '2024-01-12T09:00:00Z',
+    duration: 120,
+    status: 'COMPLETED',
+    price: 120000,
+    discount: 50,
+    isFree: false,
+    student: {
+      firstName: 'Sofia',
+      lastName: 'Ramírez',
+      email: 'sofia@email.com'
+    },
+    patient: {
+      firstName: 'Ana',
+      lastName: 'Martínez',
+      email: 'ana@email.com'
+    }
+  }
+]
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const validatedData = createAppointmentSchema.parse(body)
-
-    const appointment = await prisma.appointment.create({
-      data: validatedData,
-      include: {
-        student: {
-          include: {
-            studentProfile: true
-          }
-        },
-        patient: {
-          include: {
-            patientProfile: true
-          }
-        }
-      }
-    })
+    
+    // Mock appointment creation
+    const newAppointment = {
+      id: Date.now().toString(),
+      ...body,
+      createdAt: new Date().toISOString()
+    }
 
     return NextResponse.json({
       success: true,
-      appointment
+      appointment: newAppointment
     })
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { success: false, error: 'Datos inválidos', details: error.errors },
-        { status: 400 }
-      )
-    }
-
     console.error('Error creating appointment:', error)
     return NextResponse.json(
       { success: false, error: 'Error interno del servidor' },
@@ -65,39 +101,21 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const skip = (page - 1) * limit
 
-    const where = {
-      ...(userId && userType === 'STUDENT' && { studentId: userId }),
-      ...(userId && userType === 'PATIENT' && { patientId: userId }),
-      ...(status && { status: status as any })
+    // Filter appointments based on criteria
+    let filteredAppointments = mockAppointments
+    if (status) {
+      filteredAppointments = filteredAppointments.filter(appointment => 
+        appointment.status === status
+      )
     }
 
-    const [appointments, total] = await Promise.all([
-      prisma.appointment.findMany({
-        where,
-        include: {
-          student: {
-            include: {
-              studentProfile: true
-            }
-          },
-          patient: {
-            include: {
-              patientProfile: true
-            }
-          }
-        },
-        skip,
-        take: limit,
-        orderBy: {
-          date: 'desc'
-        }
-      }),
-      prisma.appointment.count({ where })
-    ])
+    // Pagination
+    const total = filteredAppointments.length
+    const paginatedAppointments = filteredAppointments.slice(skip, skip + limit)
 
     return NextResponse.json({
       success: true,
-      appointments,
+      appointments: paginatedAppointments,
       pagination: {
         page,
         limit,

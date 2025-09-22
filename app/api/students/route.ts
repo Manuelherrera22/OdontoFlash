@@ -1,5 +1,56 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+
+// Mock data for static build
+const mockStudents = [
+  {
+    id: '1',
+    firstName: 'Laura',
+    lastName: 'Fernández',
+    email: 'laura@email.com',
+    phone: '+57 300 111 2222',
+    address: 'Bogotá, Colombia',
+    averageRating: 4.9,
+    totalReviews: 18,
+    studentProfile: {
+      university: 'Universidad Nacional',
+      studentId: '20201012345',
+      semester: 8,
+      specialization: 'Ortodoncia'
+    }
+  },
+  {
+    id: '2',
+    firstName: 'Miguel',
+    lastName: 'Torres',
+    email: 'miguel@email.com',
+    phone: '+57 301 222 3333',
+    address: 'Medellín, Colombia',
+    averageRating: 4.7,
+    totalReviews: 12,
+    studentProfile: {
+      university: 'Universidad de los Andes',
+      studentId: '20211054321',
+      semester: 6,
+      specialization: 'Endodoncia'
+    }
+  },
+  {
+    id: '3',
+    firstName: 'Sofia',
+    lastName: 'Ramírez',
+    email: 'sofia@email.com',
+    phone: '+57 302 333 4444',
+    address: 'Cali, Colombia',
+    averageRating: 4.8,
+    totalReviews: 15,
+    studentProfile: {
+      university: 'Universidad Javeriana',
+      studentId: '20221098765',
+      semester: 7,
+      specialization: 'Odontopediatría'
+    }
+  }
+]
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,52 +61,26 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const skip = (page - 1) * limit
 
-    const where = {
-      userType: 'STUDENT',
-      studentProfile: {
-        isActive: true,
-        ...(specialization && { specialization: { contains: specialization, mode: 'insensitive' } }),
-        ...(university && { university: { contains: university, mode: 'insensitive' } })
-      }
+    // Filter students based on criteria
+    let filteredStudents = mockStudents
+    if (specialization) {
+      filteredStudents = filteredStudents.filter(student => 
+        student.studentProfile.specialization.toLowerCase().includes(specialization.toLowerCase())
+      )
+    }
+    if (university) {
+      filteredStudents = filteredStudents.filter(student => 
+        student.studentProfile.university.toLowerCase().includes(university.toLowerCase())
+      )
     }
 
-    const [students, total] = await Promise.all([
-      prisma.user.findMany({
-        where,
-        include: {
-          studentProfile: true,
-          receivedReviews: {
-            select: {
-              rating: true
-            }
-          }
-        },
-        skip,
-        take: limit,
-        orderBy: {
-          createdAt: 'desc'
-        }
-      }),
-      prisma.user.count({ where })
-    ])
-
-    // Calculate average ratings
-    const studentsWithRatings = students.map((student: any) => {
-      const ratings = student.receivedReviews.map((r: any) => r.rating)
-      const averageRating = ratings.length > 0 
-        ? ratings.reduce((sum: number, rating: number) => sum + rating, 0) / ratings.length 
-        : 0
-
-      return {
-        ...student,
-        averageRating: Math.round(averageRating * 10) / 10,
-        totalReviews: ratings.length
-      }
-    })
+    // Pagination
+    const total = filteredStudents.length
+    const paginatedStudents = filteredStudents.slice(skip, skip + limit)
 
     return NextResponse.json({
       success: true,
-      students: studentsWithRatings,
+      students: paginatedStudents,
       pagination: {
         page,
         limit,

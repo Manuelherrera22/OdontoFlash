@@ -1,5 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+
+// Mock data for static build
+const mockPatients = [
+  {
+    id: '1',
+    firstName: 'María',
+    lastName: 'González',
+    email: 'maria@email.com',
+    phone: '+57 300 123 4567',
+    address: 'Bogotá, Colombia',
+    averageRating: 4.8,
+    totalReviews: 12,
+    patientProfile: {
+      dentalNeeds: 'Limpieza dental',
+      medicalHistory: 'Sin alergias conocidas'
+    }
+  },
+  {
+    id: '2',
+    firstName: 'Carlos',
+    lastName: 'Ruiz',
+    email: 'carlos@email.com',
+    phone: '+57 301 234 5678',
+    address: 'Medellín, Colombia',
+    averageRating: 4.9,
+    totalReviews: 8,
+    patientProfile: {
+      dentalNeeds: 'Ortodoncia',
+      medicalHistory: 'Diabetes controlada'
+    }
+  },
+  {
+    id: '3',
+    firstName: 'Ana',
+    lastName: 'Martínez',
+    email: 'ana@email.com',
+    phone: '+57 302 345 6789',
+    address: 'Cali, Colombia',
+    averageRating: 4.7,
+    totalReviews: 15,
+    patientProfile: {
+      dentalNeeds: 'Endodoncia',
+      medicalHistory: 'Hipertensión controlada'
+    }
+  }
+]
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,59 +54,21 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const skip = (page - 1) * limit
 
-    const where = dentalNeeds ? {
-      userType: 'PATIENT',
-      patientProfile: {
-        dentalNeeds: {
-          contains: dentalNeeds,
-          mode: 'insensitive'
-        },
-        isActive: true
-      }
-    } : {
-      userType: 'PATIENT',
-      patientProfile: {
-        isActive: true
-      }
+    // Filter patients based on dental needs
+    let filteredPatients = mockPatients
+    if (dentalNeeds) {
+      filteredPatients = mockPatients.filter(patient => 
+        patient.patientProfile.dentalNeeds.toLowerCase().includes(dentalNeeds.toLowerCase())
+      )
     }
 
-    const [patients, total] = await Promise.all([
-      prisma.user.findMany({
-        where,
-        include: {
-          patientProfile: true,
-          receivedReviews: {
-            select: {
-              rating: true
-            }
-          }
-        },
-        skip,
-        take: limit,
-        orderBy: {
-          createdAt: 'desc'
-        }
-      }),
-      prisma.user.count({ where })
-    ])
-
-    // Calculate average ratings
-    const patientsWithRatings = patients.map((patient: any) => {
-      const ratings = patient.receivedReviews.map((r: any) => r.rating)
-      const averageRating = ratings.length > 0 
-        ? ratings.reduce((sum: number, rating: number) => sum + rating, 0) / ratings.length 
-        : 0
-
-      return {
-        ...patient,
-        averageRating: Math.round(averageRating * 10) / 10,
-        totalReviews: ratings.length
-      }
-    })
+    // Pagination
+    const total = filteredPatients.length
+    const paginatedPatients = filteredPatients.slice(skip, skip + limit)
 
     return NextResponse.json({
       success: true,
-      patients: patientsWithRatings,
+      patients: paginatedPatients,
       pagination: {
         page,
         limit,

@@ -1,71 +1,89 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
-import { z } from 'zod'
 
-const createReviewSchema = z.object({
-  reviewerId: z.string(),
-  receiverId: z.string(),
-  appointmentId: z.string().optional(),
-  rating: z.number().min(1).max(5),
-  comment: z.string().optional()
-})
+// Mock data for static build
+const mockReviews = [
+  {
+    id: '1',
+    rating: 5,
+    comment: 'Excelente atención y profesionalismo. Muy recomendado.',
+    createdAt: '2024-01-10T10:00:00Z',
+    reviewer: {
+      firstName: 'María',
+      lastName: 'González',
+      userType: 'PATIENT'
+    },
+    receiver: {
+      firstName: 'Laura',
+      lastName: 'Fernández',
+      userType: 'STUDENT'
+    }
+  },
+  {
+    id: '2',
+    rating: 4,
+    comment: 'Muy buen tratamiento, solo faltó un poco más de comunicación.',
+    createdAt: '2024-01-08T14:30:00Z',
+    reviewer: {
+      firstName: 'Carlos',
+      lastName: 'Ruiz',
+      userType: 'PATIENT'
+    },
+    receiver: {
+      firstName: 'Miguel',
+      lastName: 'Torres',
+      userType: 'STUDENT'
+    }
+  },
+  {
+    id: '3',
+    rating: 5,
+    comment: 'Estudiante muy dedicado y cuidadoso. El tratamiento fue perfecto.',
+    createdAt: '2024-01-05T09:15:00Z',
+    reviewer: {
+      firstName: 'Ana',
+      lastName: 'Martínez',
+      userType: 'PATIENT'
+    },
+    receiver: {
+      firstName: 'Sofia',
+      lastName: 'Ramírez',
+      userType: 'STUDENT'
+    }
+  },
+  {
+    id: '4',
+    rating: 4,
+    comment: 'Paciente muy colaborativo y puntual. Excelente experiencia.',
+    createdAt: '2024-01-03T16:45:00Z',
+    reviewer: {
+      firstName: 'Laura',
+      lastName: 'Fernández',
+      userType: 'STUDENT'
+    },
+    receiver: {
+      firstName: 'María',
+      lastName: 'González',
+      userType: 'PATIENT'
+    }
+  }
+]
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const validatedData = createReviewSchema.parse(body)
-
-    // Check if review already exists for this appointment
-    if (validatedData.appointmentId) {
-      const existingReview = await prisma.review.findFirst({
-        where: {
-          reviewerId: validatedData.reviewerId,
-          appointmentId: validatedData.appointmentId
-        }
-      })
-
-      if (existingReview) {
-        return NextResponse.json(
-          { success: false, error: 'Ya has calificado esta cita' },
-          { status: 409 }
-        )
-      }
+    
+    // Mock review creation
+    const newReview = {
+      id: Date.now().toString(),
+      ...body,
+      createdAt: new Date().toISOString()
     }
-
-    const review = await prisma.review.create({
-      data: validatedData,
-      include: {
-        reviewer: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userType: true
-          }
-        },
-        receiver: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userType: true
-          }
-        }
-      }
-    })
 
     return NextResponse.json({
       success: true,
-      review
+      review: newReview
     })
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { success: false, error: 'Datos inválidos', details: error.errors },
-        { status: 400 }
-      )
-    }
-
     console.error('Error creating review:', error)
     return NextResponse.json(
       { success: false, error: 'Error interno del servidor' },
@@ -82,41 +100,21 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const skip = (page - 1) * limit
 
-    const where = receiverId ? { receiverId } : {}
+    // Filter reviews based on receiverId
+    let filteredReviews = mockReviews
+    if (receiverId) {
+      filteredReviews = mockReviews.filter(review => 
+        review.receiver.id === receiverId
+      )
+    }
 
-    const [reviews, total] = await Promise.all([
-      prisma.review.findMany({
-        where,
-        include: {
-          reviewer: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userType: true
-            }
-          },
-          receiver: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userType: true
-            }
-          }
-        },
-        skip,
-        take: limit,
-        orderBy: {
-          createdAt: 'desc'
-        }
-      }),
-      prisma.review.count({ where })
-    ])
+    // Pagination
+    const total = filteredReviews.length
+    const paginatedReviews = filteredReviews.slice(skip, skip + limit)
 
     return NextResponse.json({
       success: true,
-      reviews,
+      reviews: paginatedReviews,
       pagination: {
         page,
         limit,
