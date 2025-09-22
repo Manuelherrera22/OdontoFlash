@@ -31,11 +31,11 @@ export function Hero({ onAuth }: HeroProps) {
                 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Conecta{' '}
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary via-purple-500 to-secondary bg-clip-text text-transparent">
                   Estudiantes
                 </span>{' '}
                 con{' '}
-                <span className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-secondary via-purple-400 to-primary bg-clip-text text-transparent">
                   Pacientes
                 </span>
               </motion.h1>
@@ -64,11 +64,11 @@ export function Hero({ onAuth }: HeroProps) {
                 <div className="text-xs sm:text-sm text-muted-foreground">Estudiantes</div>
               </div>
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-secondary">1,200+</div>
+                <div className="text-xl sm:text-2xl font-bold text-purple-600">1,200+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Pacientes</div>
               </div>
               <div className="text-center">
-                <div className="text-xl sm:text-2xl font-bold text-accent">4.8★</div>
+                <div className="text-xl sm:text-2xl font-bold text-secondary">4.8★</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Calificación</div>
               </div>
             </motion.div>
@@ -110,11 +110,11 @@ export function Hero({ onAuth }: HeroProps) {
                 <span>Registro gratuito</span>
               </div>
               <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-secondary" />
+                <Star className="h-4 w-4 text-purple-500" />
                 <span>Sistema de calificaciones</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-accent" />
+                <Shield className="h-4 w-4 text-secondary" />
                 <span>100% seguro</span>
               </div>
             </motion.div>

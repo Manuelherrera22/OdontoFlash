@@ -20,6 +20,7 @@ import { PatientList } from '@/components/dashboard/PatientList'
 import { StudentList } from '@/components/dashboard/StudentList'
 import { AppointmentList } from '@/components/dashboard/AppointmentList'
 import { ReviewList } from '@/components/dashboard/ReviewList'
+import { StudentCalendar } from '@/components/ui/calendar'
 
 interface DashboardStats {
   totalAppointments: number
@@ -173,10 +174,11 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
         >
           <Tabs defaultValue="appointments" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto">
               <TabsTrigger value="appointments" className="text-xs sm:text-sm">Citas</TabsTrigger>
               <TabsTrigger value="patients" className="text-xs sm:text-sm">Pacientes</TabsTrigger>
               <TabsTrigger value="students" className="text-xs sm:text-sm">Estudiantes</TabsTrigger>
+              <TabsTrigger value="calendar" className="text-xs sm:text-sm">Calendario</TabsTrigger>
               <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reseñas</TabsTrigger>
             </TabsList>
 
@@ -190,6 +192,10 @@ export default function Dashboard() {
 
             <TabsContent value="students" className="space-y-6">
               <StudentList />
+            </TabsContent>
+
+            <TabsContent value="calendar" className="space-y-6">
+              <StudentCalendar studentId="current-user" />
             </TabsContent>
 
             <TabsContent value="reviews" className="space-y-6">

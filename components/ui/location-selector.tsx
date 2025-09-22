@@ -27,7 +27,9 @@ const countries = [
   { value: 'venezuela', label: 'Venezuela' },
   { value: 'uruguay', label: 'Uruguay' },
   { value: 'paraguay', label: 'Paraguay' },
-  { value: 'bolivia', label: 'Bolivia' }
+  { value: 'bolivia', label: 'Bolivia' },
+  { value: 'brazil', label: 'Brasil' },
+  { value: 'spain', label: 'España' }
 ]
 
 const statesByCountry: Record<string, Array<{ value: string; label: string }>> = {
@@ -53,7 +55,17 @@ const statesByCountry: Record<string, Array<{ value: string; label: string }>> =
     { value: 'santander', label: 'Santander' },
     { value: 'sucre', label: 'Sucre' },
     { value: 'tolima', label: 'Tolima' },
-    { value: 'valle_cauca', label: 'Valle del Cauca' }
+    { value: 'valle_cauca', label: 'Valle del Cauca' },
+    { value: 'amazonas', label: 'Amazonas' },
+    { value: 'arauca', label: 'Arauca' },
+    { value: 'casanare', label: 'Casanare' },
+    { value: 'choco', label: 'Chocó' },
+    { value: 'guainia', label: 'Guainía' },
+    { value: 'guaviare', label: 'Guaviare' },
+    { value: 'putumayo', label: 'Putumayo' },
+    { value: 'san_andres', label: 'San Andrés y Providencia' },
+    { value: 'vaupes', label: 'Vaupés' },
+    { value: 'vichada', label: 'Vichada' }
   ],
   mexico: [
     { value: 'aguascalientes', label: 'Aguascalientes' },
@@ -113,6 +125,56 @@ const statesByCountry: Record<string, Array<{ value: string; label: string }>> =
     { value: 'santiago_del_estero', label: 'Santiago del Estero' },
     { value: 'tierra_del_fuego', label: 'Tierra del Fuego' },
     { value: 'tucuman', label: 'Tucumán' }
+  ],
+  brazil: [
+    { value: 'acre', label: 'Acre' },
+    { value: 'alagoas', label: 'Alagoas' },
+    { value: 'amapa', label: 'Amapá' },
+    { value: 'amazonas', label: 'Amazonas' },
+    { value: 'bahia', label: 'Bahía' },
+    { value: 'ceara', label: 'Ceará' },
+    { value: 'distrito_federal', label: 'Distrito Federal' },
+    { value: 'espirito_santo', label: 'Espírito Santo' },
+    { value: 'goias', label: 'Goiás' },
+    { value: 'maranhao', label: 'Maranhão' },
+    { value: 'mato_grosso', label: 'Mato Grosso' },
+    { value: 'mato_grosso_sul', label: 'Mato Grosso do Sul' },
+    { value: 'minas_gerais', label: 'Minas Gerais' },
+    { value: 'para', label: 'Pará' },
+    { value: 'paraiba', label: 'Paraíba' },
+    { value: 'parana', label: 'Paraná' },
+    { value: 'pernambuco', label: 'Pernambuco' },
+    { value: 'piaui', label: 'Piauí' },
+    { value: 'rio_de_janeiro', label: 'Río de Janeiro' },
+    { value: 'rio_grande_norte', label: 'Río Grande do Norte' },
+    { value: 'rio_grande_sul', label: 'Río Grande do Sul' },
+    { value: 'rondonia', label: 'Rondônia' },
+    { value: 'roraima', label: 'Roraima' },
+    { value: 'santa_catarina', label: 'Santa Catarina' },
+    { value: 'sao_paulo', label: 'São Paulo' },
+    { value: 'sergipe', label: 'Sergipe' },
+    { value: 'tocantins', label: 'Tocantins' }
+  ],
+  spain: [
+    { value: 'andalucia', label: 'Andalucía' },
+    { value: 'aragon', label: 'Aragón' },
+    { value: 'asturias', label: 'Asturias' },
+    { value: 'baleares', label: 'Islas Baleares' },
+    { value: 'canarias', label: 'Canarias' },
+    { value: 'cantabria', label: 'Cantabria' },
+    { value: 'castilla_leon', label: 'Castilla y León' },
+    { value: 'castilla_mancha', label: 'Castilla-La Mancha' },
+    { value: 'cataluna', label: 'Cataluña' },
+    { value: 'ceuta', label: 'Ceuta' },
+    { value: 'extremadura', label: 'Extremadura' },
+    { value: 'galicia', label: 'Galicia' },
+    { value: 'la_rioja', label: 'La Rioja' },
+    { value: 'madrid', label: 'Madrid' },
+    { value: 'melilla', label: 'Melilla' },
+    { value: 'murcia', label: 'Murcia' },
+    { value: 'navarra', label: 'Navarra' },
+    { value: 'pais_vasco', label: 'País Vasco' },
+    { value: 'valencia', label: 'Comunidad Valenciana' }
   ]
 }
 
@@ -189,7 +251,89 @@ const citiesByState: Record<string, Array<{ value: string; label: string }>> = {
     { value: 'merlo', label: 'Merlo' },
     { value: 'moron', label: 'Morón' },
     { value: 'san_isidro', label: 'San Isidro' },
-    { value: 'tigre', label: 'Tigre' }
+    { value: 'tigre', label: 'Tigre' },
+    { value: 'avellaneda', label: 'Avellaneda' },
+    { value: 'lomas_de_zamora', label: 'Lomas de Zamora' },
+    { value: 'san_miguel', label: 'San Miguel' },
+    { value: 'moreno', label: 'Moreno' }
+  ],
+  // Brasil - São Paulo
+  sao_paulo: [
+    { value: 'sao_paulo_city', label: 'São Paulo' },
+    { value: 'guarulhos', label: 'Guarulhos' },
+    { value: 'campinas', label: 'Campinas' },
+    { value: 'sao_bernardo', label: 'São Bernardo do Campo' },
+    { value: 'santo_andre', label: 'Santo André' },
+    { value: 'osasco', label: 'Osasco' },
+    { value: 'sorocaba', label: 'Sorocaba' },
+    { value: 'ribeirao_preto', label: 'Ribeirão Preto' },
+    { value: 'santos', label: 'Santos' },
+    { value: 'maua', label: 'Mauá' }
+  ],
+  // Brasil - Río de Janeiro
+  rio_de_janeiro: [
+    { value: 'rio_de_janeiro_city', label: 'Río de Janeiro' },
+    { value: 'sao_goncalo', label: 'São Gonçalo' },
+    { value: 'duque_de_caxias', label: 'Duque de Caxias' },
+    { value: 'nova_iguacu', label: 'Nova Iguaçu' },
+    { value: 'niteroi', label: 'Niterói' },
+    { value: 'belford_roxo', label: 'Belford Roxo' },
+    { value: 'sao_joao_de_meriti', label: 'São João de Meriti' },
+    { value: 'campos_dos_goytacazes', label: 'Campos dos Goytacazes' },
+    { value: 'petropolis', label: 'Petrópolis' },
+    { value: 'volta_redonda', label: 'Volta Redonda' }
+  ],
+  // España - Madrid
+  madrid: [
+    { value: 'madrid_city', label: 'Madrid' },
+    { value: 'mostoles', label: 'Móstoles' },
+    { value: 'fuenlabrada', label: 'Fuenlabrada' },
+    { value: 'alcala_henares', label: 'Alcalá de Henares' },
+    { value: 'leganes', label: 'Leganés' },
+    { value: 'getafe', label: 'Getafe' },
+    { value: 'alcorcon', label: 'Alcorcón' },
+    { value: 'torrejon_ardoz', label: 'Torrejón de Ardoz' },
+    { value: 'parla', label: 'Parla' },
+    { value: 'alcala_henares', label: 'Alcalá de Henares' }
+  ],
+  // España - Cataluña
+  cataluna: [
+    { value: 'barcelona', label: 'Barcelona' },
+    { value: 'hospitalet', label: 'Hospitalet de Llobregat' },
+    { value: 'terrassa', label: 'Terrassa' },
+    { value: 'badalona', label: 'Badalona' },
+    { value: 'sabadell', label: 'Sabadell' },
+    { value: 'lleida', label: 'Lleida' },
+    { value: 'tarragona', label: 'Tarragona' },
+    { value: 'mataro', label: 'Mataró' },
+    { value: 'santa_coloma', label: 'Santa Coloma de Gramenet' },
+    { value: 'reus', label: 'Reus' }
+  ],
+  // Colombia - Cundinamarca
+  cundinamarca: [
+    { value: 'soacha', label: 'Soacha' },
+    { value: 'girardot', label: 'Girardot' },
+    { value: 'zipaquira', label: 'Zipaquirá' },
+    { value: 'facatativa', label: 'Facatativá' },
+    { value: 'chia', label: 'Chía' },
+    { value: 'madrid', label: 'Madrid' },
+    { value: 'mosquera', label: 'Mosquera' },
+    { value: 'sibate', label: 'Sibaté' },
+    { value: 'tabio', label: 'Tabio' },
+    { value: 'tenjo', label: 'Tenjo' }
+  ],
+  // Colombia - Santander
+  santander: [
+    { value: 'bucaramanga', label: 'Bucaramanga' },
+    { value: 'floridablanca', label: 'Floridablanca' },
+    { value: 'giron', label: 'Girón' },
+    { value: 'piedecuesta', label: 'Piedecuesta' },
+    { value: 'barrancabermeja', label: 'Barrancabermeja' },
+    { value: 'socorro', label: 'Socorro' },
+    { value: 'san_gil', label: 'San Gil' },
+    { value: 'velez', label: 'Vélez' },
+    { value: 'aguachica', label: 'Aguachica' },
+    { value: 'sabana_torres', label: 'Sabana de Torres' }
   ]
 }
 

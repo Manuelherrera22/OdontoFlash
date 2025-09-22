@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
+import { StudentCalendar } from '@/components/ui/calendar'
 import { 
   Search, 
   GraduationCap, 
@@ -15,7 +16,8 @@ import {
   Phone, 
   MapPin,
   BookOpen,
-  Award
+  Award,
+  Eye
 } from 'lucide-react'
 
 interface Student {
@@ -41,6 +43,7 @@ export function StudentList() {
   const [searchTerm, setSearchTerm] = useState('')
   const [filterSpecialization, setFilterSpecialization] = useState('')
   const [filterUniversity, setFilterUniversity] = useState('')
+  const [selectedStudent, setSelectedStudent] = useState<string | null>(null)
 
   const specializations = [
     'Odontología General',
@@ -139,6 +142,10 @@ export function StudentList() {
     const matchesUniversity = !filterUniversity || student.studentProfile.university === filterUniversity
     return matchesSearch && matchesSpecialization && matchesUniversity
   })
+
+  const handleStudentSelection = (studentId: string) => {
+    setSelectedStudent(selectedStudent === studentId ? null : studentId)
+  }
 
   if (isLoading) {
     return (
@@ -272,12 +279,18 @@ export function StudentList() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <Button variant="gradient" size="sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => handleStudentSelection(student.id)}
+                      className="w-full"
+                    >
+                      <Eye className="h-4 w-4 mr-2" />
+                      Ver Disponibilidad
+                    </Button>
+                    <Button variant="gradient" size="sm" className="w-full">
                       <Calendar className="h-4 w-4 mr-2" />
                       Agendar Cita
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Ver Perfil
                     </Button>
                   </div>
                 </div>
@@ -299,6 +312,21 @@ export function StudentList() {
             </p>
           </CardContent>
         </Card>
+      )}
+
+      {/* Student Calendar for Selected Student */}
+      {selectedStudent && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mt-8"
+        >
+          <StudentCalendar 
+            studentId={selectedStudent}
+            isPublicView={true}
+          />
+        </motion.div>
       )}
     </div>
   )

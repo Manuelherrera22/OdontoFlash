@@ -12,8 +12,8 @@ Una plataforma innovadora que conecta estudiantes de odontología con pacientes 
 - **Calificaciones** de pacientes para mejorar continuamente
 
 ### Para Pacientes
-- **Registro simple** especificando necesidades odontológicas
-- **Selección de estudiantes** según especialización requerida
+- **Registro simple** especificando necesidades odontológicas y ubicación
+- **Visualización de disponibilidad** de estudiantes mediante calendario
 - **Precios accesibles** con sistema de descuentos y gratuidad
 - **Calificaciones** para garantizar calidad del servicio
 - **Comunicación directa** con estudiantes
@@ -23,6 +23,29 @@ Una plataforma innovadora que conecta estudiantes de odontología con pacientes 
 - **Sistema de reseñas** con comentarios detallados
 - **Promedio de calificaciones** visible en perfiles
 - **Historial de interacciones** para transparencia
+
+## 🔄 Flujo de Trabajo
+
+1. **Registro de Usuarios**
+   - Estudiantes: Universidad, especialización, semestre
+   - Pacientes: Necesidades odontológicas, ubicación, historial médico
+
+2. **Selección de Pacientes** (Solo Estudiantes)
+   - Los estudiantes buscan y seleccionan pacientes según:
+     - Ubicación geográfica (país, provincia, ciudad)
+     - Necesidades odontológicas específicas
+     - Disponibilidad en calendario
+   - Los pacientes NO pueden elegir estudiantes directamente
+
+3. **Gestión de Disponibilidad**
+   - Calendario integrado para estudiantes
+   - Visualización pública de horarios disponibles
+   - Los pacientes pueden ver la disponibilidad antes de ser contactados
+
+4. **Sistema de Citas**
+   - Programación flexible basada en disponibilidad
+   - Estados de seguimiento completos
+   - Precios con sistema de descuentos
 
 ## 🚀 Tecnologías Utilizadas
 
