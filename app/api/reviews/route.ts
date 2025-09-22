@@ -8,11 +8,13 @@ const mockReviews = [
     comment: 'Excelente atención y profesionalismo. Muy recomendado.',
     createdAt: '2024-01-10T10:00:00Z',
     reviewer: {
+      id: '1',
       firstName: 'María',
       lastName: 'González',
       userType: 'PATIENT'
     },
     receiver: {
+      id: '1',
       firstName: 'Laura',
       lastName: 'Fernández',
       userType: 'STUDENT'
@@ -24,11 +26,13 @@ const mockReviews = [
     comment: 'Muy buen tratamiento, solo faltó un poco más de comunicación.',
     createdAt: '2024-01-08T14:30:00Z',
     reviewer: {
+      id: '2',
       firstName: 'Carlos',
       lastName: 'Ruiz',
       userType: 'PATIENT'
     },
     receiver: {
+      id: '2',
       firstName: 'Miguel',
       lastName: 'Torres',
       userType: 'STUDENT'
@@ -40,11 +44,13 @@ const mockReviews = [
     comment: 'Estudiante muy dedicado y cuidadoso. El tratamiento fue perfecto.',
     createdAt: '2024-01-05T09:15:00Z',
     reviewer: {
+      id: '3',
       firstName: 'Ana',
       lastName: 'Martínez',
       userType: 'PATIENT'
     },
     receiver: {
+      id: '3',
       firstName: 'Sofia',
       lastName: 'Ramírez',
       userType: 'STUDENT'
@@ -56,11 +62,13 @@ const mockReviews = [
     comment: 'Paciente muy colaborativo y puntual. Excelente experiencia.',
     createdAt: '2024-01-03T16:45:00Z',
     reviewer: {
+      id: '4',
       firstName: 'Laura',
       lastName: 'Fernández',
       userType: 'STUDENT'
     },
     receiver: {
+      id: '4',
       firstName: 'María',
       lastName: 'González',
       userType: 'PATIENT'
