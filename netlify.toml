@@ -1,10 +1,13 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
+  NEXTAUTH_URL = "https://odontoflash.netlify.app"
+  NEXTAUTH_SECRET = "your-secret-key-here"
+  DATABASE_URL = "postgresql://username:password@localhost:5432/odontoflash"
 
 [[redirects]]
   from = "/*"
