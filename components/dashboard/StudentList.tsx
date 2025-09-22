@@ -143,7 +143,7 @@ export function StudentList() {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(3)].map((_: any, i: number) => (
           <Card key={i} className="animate-pulse">
             <CardContent className="p-6">
               <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
@@ -187,7 +187,7 @@ export function StudentList() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">Todas las especializaciones</SelectItem>
-                {specializations.map((spec) => (
+                {specializations.map((spec: string) => (
                   <SelectItem key={spec} value={spec}>
                     {spec}
                   </SelectItem>
@@ -200,7 +200,7 @@ export function StudentList() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">Todas las universidades</SelectItem>
-                {universities.map((uni) => (
+                {universities.map((uni: string) => (
                   <SelectItem key={uni} value={uni}>
                     {uni}
                   </SelectItem>
@@ -213,7 +213,7 @@ export function StudentList() {
 
       {/* Student List */}
       <div className="grid gap-4">
-        {filteredStudents.map((student, index) => (
+        {filteredStudents.map((student: any, index: number) => (
           <motion.div
             key={student.id}
             initial={{ opacity: 0, y: 20 }}

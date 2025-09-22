@@ -154,7 +154,7 @@ export function ReviewList() {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(3)].map((_: any, i: number) => (
           <Card key={i} className="animate-pulse">
             <CardContent className="p-6">
               <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
@@ -188,7 +188,7 @@ export function ReviewList() {
             >
               Todas
             </Button>
-            {[5, 4, 3, 2, 1].map((rating) => (
+            {[5, 4, 3, 2, 1].map((rating: number) => (
               <Button
                 key={rating}
                 variant={filterRating === rating ? 'default' : 'outline'}
@@ -206,7 +206,7 @@ export function ReviewList() {
 
       {/* Review List */}
       <div className="grid gap-4">
-        {filteredReviews.map((review, index) => (
+        {filteredReviews.map((review: any, index: number) => (
           <motion.div
             key={review.id}
             initial={{ opacity: 0, y: 20 }}
@@ -233,7 +233,7 @@ export function ReviewList() {
 
                     <div className="flex items-center gap-2 mb-3">
                       <div className="flex items-center gap-1">
-                        {[...Array(5)].map((_, i) => (
+                        {[...Array(5)].map((_: any, i: number) => (
                           <Star
                             key={i}
                             className={`h-4 w-4 ${

@@ -46,10 +46,10 @@ export async function GET(request: NextRequest) {
     ])
 
     // Calculate average ratings
-    const patientsWithRatings = patients.map(patient => {
-      const ratings = patient.receivedReviews.map(r => r.rating)
+    const patientsWithRatings = patients.map((patient: any) => {
+      const ratings = patient.receivedReviews.map((r: any) => r.rating)
       const averageRating = ratings.length > 0 
-        ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length 
+        ? ratings.reduce((sum: number, rating: number) => sum + rating, 0) / ratings.length 
         : 0
 
       return {

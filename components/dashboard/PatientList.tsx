@@ -124,7 +124,7 @@ export function PatientList() {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(3)].map((_: any, i: number) => (
           <Card key={i} className="animate-pulse">
             <CardContent className="p-6">
               <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
@@ -168,7 +168,7 @@ export function PatientList() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="">Todas las necesidades</SelectItem>
-                {dentalNeedsOptions.map((need) => (
+                {dentalNeedsOptions.map((need: string) => (
                   <SelectItem key={need} value={need}>
                     {need}
                   </SelectItem>
@@ -181,7 +181,7 @@ export function PatientList() {
 
       {/* Patient List */}
       <div className="grid gap-4">
-        {filteredPatients.map((patient, index) => (
+        {filteredPatients.map((patient: any, index: number) => (
           <motion.div
             key={patient.id}
             initial={{ opacity: 0, y: 20 }}

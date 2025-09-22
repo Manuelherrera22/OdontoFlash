@@ -173,7 +173,7 @@ export function AppointmentList() {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(3)].map((_: any, i: number) => (
           <Card key={i} className="animate-pulse">
             <CardContent className="p-6">
               <div className="h-4 bg-muted rounded w-1/4 mb-2"></div>
@@ -207,7 +207,7 @@ export function AppointmentList() {
             >
               Todas
             </Button>
-            {Object.entries(statusConfig).map(([status, config]) => (
+            {Object.entries(statusConfig).map(([status, config]: [string, any]) => (
               <Button
                 key={status}
                 variant={filterStatus === status ? 'default' : 'outline'}
@@ -225,7 +225,7 @@ export function AppointmentList() {
 
       {/* Appointment List */}
       <div className="grid gap-4">
-        {filteredAppointments.map((appointment, index) => {
+        {filteredAppointments.map((appointment: any, index: number) => {
           const StatusIcon = statusConfig[appointment.status].icon
           const finalPrice = calculatePrice(appointment)
           

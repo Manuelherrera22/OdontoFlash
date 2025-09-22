@@ -78,7 +78,7 @@ export function HowItWorks() {
         </motion.div>
 
         <div className="space-y-8">
-          {steps.map((step, index) => (
+          {steps.map((step: any, index: number) => (
             <motion.div
               key={step.step}
               initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}

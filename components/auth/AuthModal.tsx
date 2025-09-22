@@ -274,7 +274,7 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
                             <SelectValue placeholder="Selecciona tus necesidades" />
                           </SelectTrigger>
                           <SelectContent>
-                            {dentalNeedsOptions.map((need) => (
+                            {dentalNeedsOptions.map((need: string) => (
                               <SelectItem key={need} value={need}>
                                 {need}
                               </SelectItem>
@@ -328,7 +328,7 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
                             <SelectValue placeholder="Selecciona tu semestre" />
                           </SelectTrigger>
                           <SelectContent>
-                            {Array.from({ length: 10 }, (_, i) => i + 1).map((semester) => (
+                            {Array.from({ length: 10 }, (_, i) => i + 1).map((semester: number) => (
                               <SelectItem key={semester} value={semester.toString()}>
                                 Semestre {semester}
                               </SelectItem>
@@ -344,7 +344,7 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
                             <SelectValue placeholder="Selecciona tu especialización" />
                           </SelectTrigger>
                           <SelectContent>
-                            {specializations.map((spec) => (
+                            {specializations.map((spec: string) => (
                               <SelectItem key={spec} value={spec}>
                                 {spec}
                               </SelectItem>

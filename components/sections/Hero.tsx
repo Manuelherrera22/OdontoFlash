@@ -144,7 +144,7 @@ export function Hero({ onAuth }: HeroProps) {
                     "Excelente experiencia con mi paciente. Muy profesional y atenta."
                   </div>
                   <div className="flex gap-1 mt-2">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_: any, i: number) => (
                       <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
@@ -164,7 +164,7 @@ export function Hero({ onAuth }: HeroProps) {
                     "Tratamiento de limpieza dental. Muy satisfecho con el servicio."
                   </div>
                   <div className="flex gap-1 mt-2">
-                    {[...Array(5)].map((_, i) => (
+                    {[...Array(5)].map((_: any, i: number) => (
                       <Star key={i} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>

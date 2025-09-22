@@ -99,7 +99,7 @@ export function Features() {
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
+          {features.map((feature: any, index: number) => (
             <motion.div
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
