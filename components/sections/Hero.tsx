@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ onAuth }: HeroProps) {
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden py-12 sm:py-20 md:py-32">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20" />
       
@@ -28,7 +28,7 @@ export function Hero({ onAuth }: HeroProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+                className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Conecta{' '}
                 <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -44,7 +44,7 @@ export function Hero({ onAuth }: HeroProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-lg text-muted-foreground sm:text-xl"
+                className="text-base text-muted-foreground sm:text-lg md:text-xl"
               >
                 La plataforma que revoluciona la educación odontológica conectando 
                 estudiantes con pacientes reales. Sistema de calificaciones, 
@@ -57,19 +57,19 @@ export function Hero({ onAuth }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-3 gap-8"
+              className="grid grid-cols-3 gap-4 sm:gap-8"
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">500+</div>
-                <div className="text-sm text-muted-foreground">Estudiantes</div>
+                <div className="text-xl sm:text-2xl font-bold text-primary">500+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Estudiantes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-secondary">1,200+</div>
-                <div className="text-sm text-muted-foreground">Pacientes</div>
+                <div className="text-xl sm:text-2xl font-bold text-secondary">1,200+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Pacientes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-accent">4.8★</div>
-                <div className="text-sm text-muted-foreground">Calificación</div>
+                <div className="text-xl sm:text-2xl font-bold text-accent">4.8★</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Calificación</div>
               </div>
             </motion.div>
 
@@ -103,7 +103,7 @@ export function Hero({ onAuth }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap gap-6 text-sm text-muted-foreground"
+              className="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground"
             >
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-primary" />
@@ -127,7 +127,7 @@ export function Hero({ onAuth }: HeroProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 p-8">
+            <div className="relative rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 p-4 sm:p-8">
               {/* Mockup of the app interface */}
               <div className="space-y-4">
                 <div className="rounded-lg bg-card p-4 shadow-lg">

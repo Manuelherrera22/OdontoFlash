@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { LocationSelector } from '@/components/ui/location-selector'
 import { GraduationCap, User, Mail, Lock, Phone, MapPin, Calendar, Stethoscope } from 'lucide-react'
 
 interface AuthModalProps {
@@ -37,11 +38,21 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
     university: '',
     semester: '',
     specialization: '',
-    studentId: ''
+    studentId: '',
+    // Location
+    location: {
+      country: '',
+      state: '',
+      city: ''
+    }
   })
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | object) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleLocationChange = (location: { country: string; state: string; city: string }) => {
+    setFormData(prev => ({ ...prev, location }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -80,7 +91,7 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[95vh] overflow-y-auto w-[95vw] sm:w-full">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
             {type === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}
@@ -234,13 +245,19 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
                     </div>
                   </div>
 
+                  {/* Location Selector */}
+                  <LocationSelector 
+                    onLocationChange={handleLocationChange}
+                    initialLocation={formData.location}
+                  />
+
                   <div className="space-y-2">
-                    <Label htmlFor="address">Dirección</Label>
+                    <Label htmlFor="address">Dirección específica</Label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="address"
-                        placeholder="Tu dirección"
+                        placeholder="Calle, número, barrio..."
                         className="pl-10"
                         value={formData.address}
                         onChange={(e) => handleInputChange('address', e.target.value)}

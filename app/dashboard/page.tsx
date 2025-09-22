@@ -83,20 +83,20 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="border-b bg-background/95 backdrop-blur"
       >
-        <div className="container py-6">
-          <div className="flex items-center justify-between">
+        <div className="container py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-              <p className="text-muted-foreground">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Dashboard</h1>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Bienvenido a tu panel de control de OdontoFlash
               </p>
             </div>
-            <div className="flex gap-4">
-              <Button variant="outline" size="sm">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              <Button variant="outline" size="sm" className="w-full sm:w-auto">
                 <Search className="h-4 w-4 mr-2" />
                 Buscar
               </Button>
-              <Button variant="gradient" size="sm">
+              <Button variant="gradient" size="sm" className="w-full sm:w-auto">
                 <Plus className="h-4 w-4 mr-2" />
                 Nueva Cita
               </Button>
@@ -111,7 +111,7 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8"
+          className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8"
         >
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -173,11 +173,11 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
         >
           <Tabs defaultValue="appointments" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="appointments">Citas</TabsTrigger>
-              <TabsTrigger value="patients">Pacientes</TabsTrigger>
-              <TabsTrigger value="students">Estudiantes</TabsTrigger>
-              <TabsTrigger value="reviews">Reseñas</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+              <TabsTrigger value="appointments" className="text-xs sm:text-sm">Citas</TabsTrigger>
+              <TabsTrigger value="patients" className="text-xs sm:text-sm">Pacientes</TabsTrigger>
+              <TabsTrigger value="students" className="text-xs sm:text-sm">Estudiantes</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reseñas</TabsTrigger>
             </TabsList>
 
             <TabsContent value="appointments" className="space-y-6">
