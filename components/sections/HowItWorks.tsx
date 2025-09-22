@@ -17,43 +17,43 @@ const steps = [
     step: 1,
     icon: UserPlus,
     title: 'Registro',
-    description: 'Los pacientes se registran especificando sus necesidades odontológicas y los estudiantes crean su perfil profesional.',
-    color: 'from-blue-500 to-cyan-500'
+    description: 'Los pacientes se registran especificando sus necesidades odontológicas y ubicación. Los estudiantes crean su perfil profesional.',
+    color: 'from-blue-500 to-purple-400'
   },
   {
     step: 2,
     icon: Search,
-    title: 'Búsqueda y Selección',
-    description: 'Los estudiantes buscan pacientes según sus especialidades y los pacientes pueden elegir estudiantes.',
-    color: 'from-green-500 to-emerald-500'
+    title: 'Selección de Pacientes',
+    description: 'Los estudiantes buscan y seleccionan pacientes según sus especialidades, ubicación geográfica y disponibilidad.',
+    color: 'from-purple-500 to-violet-500'
   },
   {
     step: 3,
     icon: Calendar,
     title: 'Programación de Citas',
-    description: 'Se coordina la fecha y hora de la cita odontológica según disponibilidad de ambas partes.',
-    color: 'from-purple-500 to-pink-500'
+    description: 'Se coordina la fecha y hora de la cita odontológica según la disponibilidad del calendario del estudiante.',
+    color: 'from-violet-500 to-purple-600'
   },
   {
     step: 4,
     icon: MessageCircle,
     title: 'Comunicación',
     description: 'Chat directo para coordinar detalles del tratamiento y resolver dudas antes de la cita.',
-    color: 'from-orange-500 to-red-500'
+    color: 'from-purple-600 to-indigo-500'
   },
   {
     step: 5,
     icon: CheckCircle,
     title: 'Realización del Tratamiento',
     description: 'Se lleva a cabo la consulta odontológica con supervisión profesional cuando sea necesario.',
-    color: 'from-indigo-500 to-purple-500'
+    color: 'from-indigo-500 to-violet-500'
   },
   {
     step: 6,
     icon: Star,
     title: 'Calificación y Feedback',
     description: 'Ambas partes califican la experiencia y proporcionan comentarios para mejorar el servicio.',
-    color: 'from-yellow-500 to-orange-500'
+    color: 'from-purple-500 to-pink-500'
   }
 ]
 
@@ -153,11 +153,11 @@ export function HowItWorks() {
                   <div className="text-sm text-muted-foreground">Estudiantes activos</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-secondary">1,200+</div>
+                  <div className="text-2xl font-bold text-purple-600">1,200+</div>
                   <div className="text-sm text-muted-foreground">Pacientes atendidos</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-accent">98%</div>
+                  <div className="text-2xl font-bold text-secondary">98%</div>
                   <div className="text-sm text-muted-foreground">Satisfacción</div>
                 </div>
               </div>

@@ -32,7 +32,8 @@ interface DashboardStats {
 }
 
 export default function Dashboard() {
-  const [userType, setUserType] = useState<'PATIENT' | 'STUDENT'>('PATIENT')
+  const [userType, setUserType] = useState<'patient' | 'student'>('patient')
+  const [userData, setUserData] = useState<any>(null)
   const [stats, setStats] = useState<DashboardStats>({
     totalAppointments: 0,
     completedAppointments: 0,
@@ -42,6 +43,24 @@ export default function Dashboard() {
     pendingAppointments: 0
   })
   const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Load user data from localStorage
+    const loadUserData = () => {
+      const storedUserType = localStorage.getItem('userType')
+      const storedUserData = localStorage.getItem('userData')
+      
+      if (storedUserType) {
+        setUserType(storedUserType as 'patient' | 'student')
+      }
+      
+      if (storedUserData) {
+        setUserData(JSON.parse(storedUserData))
+      }
+    }
+
+    loadUserData()
+  }, [])
 
   useEffect(() => {
     // Simulate loading user data and stats
@@ -89,7 +108,10 @@ export default function Dashboard() {
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Dashboard</h1>
               <p className="text-sm sm:text-base text-muted-foreground">
-                Bienvenido a tu panel de control de OdontoFlash
+                Bienvenido{userData?.firstName ? `, ${userData.firstName}` : ''} a tu panel de control de OdontoFlash
+              </p>
+              <p className="text-xs text-purple-600 font-medium">
+                {userType === 'student' ? '👨‍🎓 Estudiante' : '👤 Paciente'}
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
@@ -174,29 +196,44 @@ export default function Dashboard() {
           transition={{ delay: 0.2 }}
         >
           <Tabs defaultValue="appointments" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 h-auto">
+            <TabsList className={`grid w-full h-auto ${
+              userType === 'student' 
+                ? 'grid-cols-2 sm:grid-cols-5' 
+                : 'grid-cols-2 sm:grid-cols-4'
+            }`}>
               <TabsTrigger value="appointments" className="text-xs sm:text-sm">Citas</TabsTrigger>
-              <TabsTrigger value="patients" className="text-xs sm:text-sm">Pacientes</TabsTrigger>
-              <TabsTrigger value="students" className="text-xs sm:text-sm">Estudiantes</TabsTrigger>
-              <TabsTrigger value="calendar" className="text-xs sm:text-sm">Calendario</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reseñas</TabsTrigger>
+              {userType === 'student' ? (
+                <>
+                  <TabsTrigger value="patients" className="text-xs sm:text-sm">Pacientes</TabsTrigger>
+                  <TabsTrigger value="calendar" className="text-xs sm:text-sm">Mi Calendario</TabsTrigger>
+                  <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reseñas</TabsTrigger>
+                </>
+              ) : (
+                <>
+                  <TabsTrigger value="students" className="text-xs sm:text-sm">Estudiantes</TabsTrigger>
+                  <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reseñas</TabsTrigger>
+                </>
+              )}
             </TabsList>
 
             <TabsContent value="appointments" className="space-y-6">
               <AppointmentList />
             </TabsContent>
 
-            <TabsContent value="patients" className="space-y-6">
-              <PatientList />
-            </TabsContent>
-
-            <TabsContent value="students" className="space-y-6">
-              <StudentList />
-            </TabsContent>
-
-            <TabsContent value="calendar" className="space-y-6">
-              <StudentCalendar studentId="current-user" />
-            </TabsContent>
+            {userType === 'student' ? (
+              <>
+                <TabsContent value="patients" className="space-y-6">
+                  <PatientList />
+                </TabsContent>
+                <TabsContent value="calendar" className="space-y-6">
+                  <StudentCalendar studentId="current-user" />
+                </TabsContent>
+              </>
+            ) : (
+              <TabsContent value="students" className="space-y-6">
+                <StudentList />
+              </TabsContent>
+            )}
 
             <TabsContent value="reviews" className="space-y-6">
               <ReviewList />

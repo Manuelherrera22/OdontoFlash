@@ -25,11 +25,7 @@ const countries = [
   { value: 'peru', label: 'Perú' },
   { value: 'ecuador', label: 'Ecuador' },
   { value: 'venezuela', label: 'Venezuela' },
-  { value: 'uruguay', label: 'Uruguay' },
-  { value: 'paraguay', label: 'Paraguay' },
-  { value: 'bolivia', label: 'Bolivia' },
-  { value: 'brazil', label: 'Brasil' },
-  { value: 'spain', label: 'España' }
+  { value: 'brazil', label: 'Brasil' }
 ]
 
 const statesByCountry: Record<string, Array<{ value: string; label: string }>> = {
@@ -175,6 +171,103 @@ const statesByCountry: Record<string, Array<{ value: string; label: string }>> =
     { value: 'navarra', label: 'Navarra' },
     { value: 'pais_vasco', label: 'País Vasco' },
     { value: 'valencia', label: 'Comunidad Valenciana' }
+  ],
+  ecuador: [
+    { value: 'azuay', label: 'Azuay' },
+    { value: 'bolivar', label: 'Bolívar' },
+    { value: 'canar', label: 'Cañar' },
+    { value: 'carchi', label: 'Carchi' },
+    { value: 'chimborazo', label: 'Chimborazo' },
+    { value: 'cotopaxi', label: 'Cotopaxi' },
+    { value: 'el_oro', label: 'El Oro' },
+    { value: 'esmeraldas', label: 'Esmeraldas' },
+    { value: 'galapagos', label: 'Galápagos' },
+    { value: 'guayas', label: 'Guayas' },
+    { value: 'imbabura', label: 'Imbabura' },
+    { value: 'loja', label: 'Loja' },
+    { value: 'los_rios', label: 'Los Ríos' },
+    { value: 'manabi', label: 'Manabí' },
+    { value: 'morona_santiago', label: 'Morona Santiago' },
+    { value: 'napo', label: 'Napo' },
+    { value: 'orellana', label: 'Orellana' },
+    { value: 'pastaza', label: 'Pastaza' },
+    { value: 'pichincha', label: 'Pichincha' },
+    { value: 'santa_elena', label: 'Santa Elena' },
+    { value: 'santo_domingo', label: 'Santo Domingo de los Tsáchilas' },
+    { value: 'sucumbios', label: 'Sucumbíos' },
+    { value: 'tungurahua', label: 'Tungurahua' },
+    { value: 'zamora_chinchipe', label: 'Zamora Chinchipe' }
+  ],
+  venezuela: [
+    { value: 'amazonas', label: 'Amazonas' },
+    { value: 'anzoategui', label: 'Anzoátegui' },
+    { value: 'apure', label: 'Apure' },
+    { value: 'aragua', label: 'Aragua' },
+    { value: 'barinas', label: 'Barinas' },
+    { value: 'bolivar', label: 'Bolívar' },
+    { value: 'carabobo', label: 'Carabobo' },
+    { value: 'cojedes', label: 'Cojedes' },
+    { value: 'delta_amacuro', label: 'Delta Amacuro' },
+    { value: 'falcon', label: 'Falcón' },
+    { value: 'guarico', label: 'Guárico' },
+    { value: 'lara', label: 'Lara' },
+    { value: 'merida', label: 'Mérida' },
+    { value: 'miranda', label: 'Miranda' },
+    { value: 'monagas', label: 'Monagas' },
+    { value: 'nueva_esparta', label: 'Nueva Esparta' },
+    { value: 'portuguesa', label: 'Portuguesa' },
+    { value: 'sucre', label: 'Sucre' },
+    { value: 'tachira', label: 'Táchira' },
+    { value: 'trujillo', label: 'Trujillo' },
+    { value: 'vargas', label: 'Vargas' },
+    { value: 'yaracuy', label: 'Yaracuy' },
+    { value: 'zulia', label: 'Zulia' },
+    { value: 'distrito_capital', label: 'Distrito Capital' }
+  ],
+  peru: [
+    { value: 'amazonas', label: 'Amazonas' },
+    { value: 'ancash', label: 'Áncash' },
+    { value: 'apurimac', label: 'Apurímac' },
+    { value: 'arequipa', label: 'Arequipa' },
+    { value: 'ayacucho', label: 'Ayacucho' },
+    { value: 'cajamarca', label: 'Cajamarca' },
+    { value: 'callao', label: 'Callao' },
+    { value: 'cusco', label: 'Cusco' },
+    { value: 'huancavelica', label: 'Huancavelica' },
+    { value: 'huanuco', label: 'Huánuco' },
+    { value: 'ica', label: 'Ica' },
+    { value: 'junin', label: 'Junín' },
+    { value: 'la_libertad', label: 'La Libertad' },
+    { value: 'lambayeque', label: 'Lambayeque' },
+    { value: 'lima', label: 'Lima' },
+    { value: 'loreto', label: 'Loreto' },
+    { value: 'madre_de_dios', label: 'Madre de Dios' },
+    { value: 'moquegua', label: 'Moquegua' },
+    { value: 'pasco', label: 'Pasco' },
+    { value: 'piura', label: 'Piura' },
+    { value: 'puno', label: 'Puno' },
+    { value: 'san_martin', label: 'San Martín' },
+    { value: 'tacna', label: 'Tacna' },
+    { value: 'tumbes', label: 'Tumbes' },
+    { value: 'ucayali', label: 'Ucayali' }
+  ],
+  chile: [
+    { value: 'arica_parinacota', label: 'Arica y Parinacota' },
+    { value: 'tarapaca', label: 'Tarapacá' },
+    { value: 'antofagasta', label: 'Antofagasta' },
+    { value: 'atacama', label: 'Atacama' },
+    { value: 'coquimbo', label: 'Coquimbo' },
+    { value: 'valparaiso', label: 'Valparaíso' },
+    { value: 'metropolitana', label: 'Metropolitana' },
+    { value: 'ohiggins', label: 'O\'Higgins' },
+    { value: 'maule', label: 'Maule' },
+    { value: 'nuble', label: 'Ñuble' },
+    { value: 'biobio', label: 'Biobío' },
+    { value: 'la_araucania', label: 'La Araucanía' },
+    { value: 'los_rios', label: 'Los Ríos' },
+    { value: 'los_lagos', label: 'Los Lagos' },
+    { value: 'aysen', label: 'Aysén' },
+    { value: 'magallanes', label: 'Magallanes y Antártica Chilena' }
   ]
 }
 
@@ -334,6 +427,101 @@ const citiesByState: Record<string, Array<{ value: string; label: string }>> = {
     { value: 'velez', label: 'Vélez' },
     { value: 'aguachica', label: 'Aguachica' },
     { value: 'sabana_torres', label: 'Sabana de Torres' }
+  ],
+  // Ecuador - Pichincha
+  pichincha: [
+    { value: 'quito', label: 'Quito' },
+    { value: 'cayambe', label: 'Cayambe' },
+    { value: 'machachi', label: 'Machachi' },
+    { value: 'puerto_quito', label: 'Puerto Quito' },
+    { value: 'pedro_vicente', label: 'Pedro Vicente Maldonado' },
+    { value: 'mejia', label: 'Mejía' },
+    { value: 'pedro_moncayo', label: 'Pedro Moncayo' },
+    { value: 'ruminahui', label: 'Rumiñahui' },
+    { value: 'san_miguel', label: 'San Miguel de los Bancos' }
+  ],
+  // Ecuador - Guayas
+  guayas: [
+    { value: 'guayaquil', label: 'Guayaquil' },
+    { value: 'duran', label: 'Durán' },
+    { value: 'samborondon', label: 'Samborondón' },
+    { value: 'salitre', label: 'Salitre' },
+    { value: 'naranjito', label: 'Naranjito' },
+    { value: 'milagro', label: 'Milagro' },
+    { value: 'nobol', label: 'Nobol' },
+    { value: 'playas', label: 'Playas' },
+    { value: 'yaguachi', label: 'Yaguachi' }
+  ],
+  // Venezuela - Miranda
+  miranda: [
+    { value: 'caracas', label: 'Caracas' },
+    { value: 'petare', label: 'Petare' },
+    { value: 'guatire', label: 'Guatire' },
+    { value: 'guarenas', label: 'Guarenas' },
+    { value: 'los_teques', label: 'Los Teques' },
+    { value: 'ocumare', label: 'Ocumare del Tuy' },
+    { value: 'santa_lucia', label: 'Santa Lucía' },
+    { value: 'charallave', label: 'Charallave' },
+    { value: 'cua', label: 'Cúa' }
+  ],
+  // Venezuela - Zulia
+  zulia: [
+    { value: 'maracaibo', label: 'Maracaibo' },
+    { value: 'cabimas', label: 'Cabimas' },
+    { value: 'ciudad_ojeda', label: 'Ciudad Ojeda' },
+    { value: 'valencia', label: 'Valencia' },
+    { value: 'san_francisco', label: 'San Francisco' },
+    { value: 'machiques', label: 'Machiques' },
+    { value: 'puerto_cabello', label: 'Puerto Cabello' },
+    { value: 'santa_rita', label: 'Santa Rita' },
+    { value: 'la_cañada', label: 'La Cañada' }
+  ],
+  // Perú - Lima
+  lima: [
+    { value: 'lima_metropolitana', label: 'Lima Metropolitana' },
+    { value: 'callao', label: 'Callao' },
+    { value: 'huaral', label: 'Huaral' },
+    { value: 'huacho', label: 'Huacho' },
+    { value: 'canete', label: 'Cañete' },
+    { value: 'barranca', label: 'Barranca' },
+    { value: 'huarochiri', label: 'Huarochirí' },
+    { value: 'oyon', label: 'Oyón' },
+    { value: 'yauyos', label: 'Yauyos' }
+  ],
+  // Perú - Arequipa
+  arequipa: [
+    { value: 'arequipa_city', label: 'Arequipa' },
+    { value: 'camana', label: 'Camaná' },
+    { value: 'caraveli', label: 'Caravelí' },
+    { value: 'castilla', label: 'Castilla' },
+    { value: 'caylloma', label: 'Caylloma' },
+    { value: 'condesuyos', label: 'Condesuyos' },
+    { value: 'islay', label: 'Islay' },
+    { value: 'la_union', label: 'La Unión' }
+  ],
+  // Chile - Metropolitana
+  metropolitana: [
+    { value: 'santiago', label: 'Santiago' },
+    { value: 'puente_alto', label: 'Puente Alto' },
+    { value: 'maipu', label: 'Maipú' },
+    { value: 'la_florida', label: 'La Florida' },
+    { value: 'las_condes', label: 'Las Condes' },
+    { value: 'san_bernardo', label: 'San Bernardo' },
+    { value: 'penalolen', label: 'Peñalolén' },
+    { value: 'macul', label: 'Macul' },
+    { value: 'quinta_normal', label: 'Quinta Normal' }
+  ],
+  // Chile - Valparaíso
+  valparaiso: [
+    { value: 'valparaiso_city', label: 'Valparaíso' },
+    { value: 'vina_del_mar', label: 'Viña del Mar' },
+    { value: 'quillota', label: 'Quillota' },
+    { value: 'san_antonio', label: 'San Antonio' },
+    { value: 'los_andes', label: 'Los Andes' },
+    { value: 'san_felipe', label: 'San Felipe' },
+    { value: 'la_ligua', label: 'La Ligua' },
+    { value: 'petorca', label: 'Petorca' },
+    { value: 'zapallar', label: 'Zapallar' }
   ]
 }
 

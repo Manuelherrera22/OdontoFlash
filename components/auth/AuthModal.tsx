@@ -55,15 +55,66 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
     setFormData(prev => ({ ...prev, location }))
   }
 
+  const handleLoginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500))
+      
+      // Simulate successful login - get user type from "database"
+      const userType = formData.email.includes('student') ? 'student' : 'patient'
+      
+      // Store user type in localStorage for demo purposes
+      localStorage.setItem('userType', userType)
+      localStorage.setItem('userData', JSON.stringify({
+        firstName: userType === 'student' ? 'Estudiante' : 'Paciente',
+        lastName: 'Ejemplo',
+        email: formData.email,
+        userType: userType,
+        location: { country: 'colombia', state: 'bogota', city: 'chapinero' }
+      }))
+      
+      // Redirect to dashboard
+      window.location.href = '/dashboard'
+      
+    } catch (error) {
+      console.error('Login error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsLoading(false)
-    onClose()
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // Simulate successful authentication
+      const userType = formData.userType
+      
+      // Store user type in localStorage for demo purposes
+      localStorage.setItem('userType', userType)
+      localStorage.setItem('userData', JSON.stringify({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        userType: userType,
+        location: formData.location
+      }))
+      
+      // Redirect to dashboard
+      window.location.href = '/dashboard'
+      
+    } catch (error) {
+      console.error('Authentication error:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const dentalNeedsOptions = [
@@ -113,7 +164,7 @@ export function AuthModal({ isOpen, onClose, type, onSwitchType }: AuthModalProp
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={(e) => handleLoginSubmit(e)} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Correo electrónico</Label>
                     <div className="relative">
