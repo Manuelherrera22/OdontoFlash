@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description: 'Conecta estudiantes de odontología con pacientes que necesitan atención dental. Sistema de calificaciones y descuentos incluido.',
   keywords: 'odontología, estudiantes, pacientes, citas, calificaciones, descuentos',
   authors: [{ name: 'OdontoFlash Team' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
+  metadataBase: new URL('https://odontoflash.netlify.app'),
   openGraph: {
     title: 'OdontoFlash - Plataforma para Estudiantes de Odontología',
     description: 'Conecta estudiantes de odontología con pacientes que necesitan atención dental.',
@@ -23,6 +23,11 @@ export const metadata: Metadata = {
     title: 'OdontoFlash - Plataforma para Estudiantes de Odontología',
     description: 'Conecta estudiantes de odontología con pacientes que necesitan atención dental.',
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
