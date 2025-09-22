@@ -226,7 +226,7 @@ export function AppointmentList() {
       {/* Appointment List */}
       <div className="grid gap-4">
         {filteredAppointments.map((appointment: any, index: number) => {
-          const StatusIcon = statusConfig[appointment.status].icon
+          const StatusIcon = statusConfig[appointment.status as keyof typeof statusConfig]?.icon || statusConfig.SCHEDULED.icon
           const finalPrice = calculatePrice(appointment)
           
           return (
@@ -241,13 +241,13 @@ export function AppointmentList() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-3 h-3 rounded-full ${statusConfig[appointment.status].color}`}></div>
+                        <div className={`w-3 h-3 rounded-full ${statusConfig[appointment.status as keyof typeof statusConfig]?.color || statusConfig.SCHEDULED.color}`}></div>
                         <h3 className="text-lg font-semibold text-foreground">
                           {appointment.title}
                         </h3>
                         <Badge variant="outline" className="flex items-center gap-1">
                           <StatusIcon className="h-3 w-3" />
-                          {statusConfig[appointment.status].label}
+                          {statusConfig[appointment.status as keyof typeof statusConfig]?.label || statusConfig.SCHEDULED.label}
                         </Badge>
                       </div>
 
