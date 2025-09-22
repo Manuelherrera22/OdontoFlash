@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/private/
+
+# Host
+Host: https://odontoflash.netlify.app
+
+# Sitemaps
+Sitemap: https://odontoflash.netlify.app/sitemap.xml

@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/private/
+
+Sitemap: https://odontoflash.netlify.app/sitemap.xml

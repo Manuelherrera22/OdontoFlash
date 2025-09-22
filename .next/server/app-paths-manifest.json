@@ -1,0 +1,14 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/api/auth/login/route": "app/api/auth/login/route.js",
+  "/api/appointments/route": "app/api/appointments/route.js",
+  "/api/patients/route": "app/api/patients/route.js",
+  "/api/auth/register/route": "app/api/auth/register/route.js",
+  "/api/reviews/route": "app/api/reviews/route.js",
+  "/api/students/route": "app/api/students/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/manifest.webmanifest/route": "app/manifest.webmanifest/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/page": "app/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js"
+}
